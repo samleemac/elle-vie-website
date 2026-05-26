@@ -100,6 +100,7 @@
                 <li class="menu__item"><a href="services.html" class="menu__link">Services</a></li>
                 <li class="menu__item"><a href="https://www.google.com/maps/place/Elle+Vie+Hair+%26+Beauty/@53.0240433,-1.4788394,15z/data=!4m2!3m1!1s0x0:0xa0e044187cab722d?sa=X&ved=2ahUKEwjLvsyBmYyDAxWkQkEAHSjqBVkQ_BJ6BAgUEAA" class="menu__link" target="_blank">Find Us</a></li>
               </ul>
+              <a href="tel:+441773823300" class="header__cta">Book Now</a>
             </nav>
           </div>
           <div class="header__actions actions-header">
@@ -126,17 +127,24 @@
           </div>
         </div>
       </section>
+      <div class="section-divider"><span class="section-divider__diamond"></span></div>
       <section class="page__contact-info contact-info animate-on-scroll">
         <div class="contact-info__container">
           <div class="contact-info__item">
+            <div class="contact-info__icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
             <h3 class="contact-info__title">Contact</h3>
             <div class="contact-info__content">
-              <p>01773 823 300</p>
-              <p>ellevie@hotmail.co.uk</p>
+              <p><a href="tel:+441773823300">01773 823 300</a></p>
+              <p><a href="mailto:ellevie@hotmail.co.uk">ellevie@hotmail.co.uk</a></p>
             </div>
           </div>
           
           <div class="contact-info__item">
+            <div class="contact-info__icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/><polyline points="12,6 12,12 16,14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
             <h3 class="contact-info__title">Hours</h3>
             <div class="contact-info__content">
               <p>Sunday-Monday: Closed</p>
@@ -149,6 +157,9 @@
           </div>
           
           <div class="contact-info__item">
+            <div class="contact-info__icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="10" r="3" stroke="currentColor" stroke-width="2"/></svg>
+            </div>
             <h3 class="contact-info__title">Location</h3>
             <div class="contact-info__content">
               <p>1 Church Street,</p>
@@ -159,6 +170,7 @@
           </div>
         </div>
       </section>
+      <div class="section-divider"><span class="section-divider__diamond"></span></div>
       <section class="page__about about animate-on-scroll">
         <div class="about__container">
           <div class="about__image">
@@ -183,6 +195,7 @@
           </div>
         </div>
       </section>
+      <div class="section-divider"><span class="section-divider__diamond"></span></div>
       <section class="page__services services animate-on-scroll">
         <div class="services__container">
           <h3 class="services__subtitle">OUR SERVICES</h3>
@@ -249,12 +262,17 @@
               <img src="images/icons/arrow_right.png" alt="Next">
             </button>
           </div>
+          <div class="services__scroll-hint">
+            <span class="services__scroll-hint-text">Swipe to see more</span>
+            <span class="services__scroll-hint-arrow">→</span>
+          </div>
           <div class="services__buttons">
             <a href="#" class="services__button services__button--primary main__button">Make a reservation</a>
             <a href="services.html" class="services__button services__button--secondary">Browse services</a>
           </div>
         </div>
       </section>
+      <div class="section-divider"><span class="section-divider__diamond"></span></div>
       <section class="page__testimonial testimonial animate-on-scroll" id="testimonials">
         <div class="testimonial__container">
           <h3 class="testimonial__subtitle">TESTIMONIALS</h3>
@@ -316,6 +334,7 @@
           </div>
         </div>
       </section>
+      <div class="section-divider"><span class="section-divider__diamond"></span></div>
       <section class="page__instagram instagram animate-on-scroll">
         <div class="instagram__container">
           <h3 class="instagram__subtitle">FOLLOW US</h3>
@@ -554,6 +573,65 @@
             header.classList.remove('scrolled');
           }
         });
+      }
+      
+      // Mobile services scroll hint
+      var servicesRow = document.querySelector('.services__row');
+      var servicesSlider = document.querySelector('.services__slider');
+      var scrollHint = document.querySelector('.services__scroll-hint');
+      
+      if (servicesRow && servicesSlider && scrollHint) {
+        // Check if we're on mobile (scroll hint is visible)
+        var checkMobile = function() {
+          return window.getComputedStyle(scrollHint).display !== 'none';
+        };
+        
+        // Update gradient based on scroll position
+        var updateGradient = function() {
+          if (!checkMobile()) return;
+          
+          var scrollLeft = servicesRow.scrollLeft;
+          var maxScroll = servicesRow.scrollWidth - servicesRow.clientWidth;
+          
+          // Show gradient when not at the end
+          if (scrollLeft < maxScroll - 10) {
+            servicesSlider.classList.add('show-gradient');
+            servicesSlider.classList.remove('at-end');
+          } else {
+            servicesSlider.classList.add('at-end');
+          }
+          
+          // Show gradient at start
+          if (scrollLeft < 10) {
+            servicesSlider.classList.add('show-gradient');
+          }
+        };
+        
+        // Hide hint after first scroll
+        var hasScrolled = false;
+        servicesRow.addEventListener('scroll', function() {
+          if (!hasScrolled && checkMobile()) {
+            hasScrolled = true;
+            scrollHint.classList.add('hidden');
+          }
+          updateGradient();
+        });
+        
+        // Initialize gradient on load and resize
+        var initScrollHint = function() {
+          if (checkMobile()) {
+            servicesSlider.classList.add('show-gradient');
+            // Reset hint visibility on resize to mobile
+            if (!hasScrolled) {
+              scrollHint.classList.remove('hidden');
+            }
+          } else {
+            servicesSlider.classList.remove('show-gradient');
+          }
+        };
+        
+        initScrollHint();
+        window.addEventListener('resize', initScrollHint);
       }
     };
   </script>
