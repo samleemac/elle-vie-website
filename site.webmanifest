@@ -1,0 +1,17 @@
+{
+  "name": "Elle Vie Hair & Beauty",
+  "short_name": "Elle Vie",
+  "description": "Hair salon and beauty treatments in Belper, Derbyshire.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#c9a86c",
+  "lang": "en-GB",
+  "icons": [
+    {
+      "src": "/images/home/logo.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    }
+  ]
+}

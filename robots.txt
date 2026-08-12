@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://ellevie.co.uk/sitemap.xml
