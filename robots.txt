@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://ellevie.co.uk/sitemap.xml
+Sitemap: https://www.elleviebelper.co.uk/sitemap.xml
