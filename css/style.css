@@ -37,6 +37,22 @@ html {
   scroll-behavior: smooth;
 }
 
+html:has(.timeline) {
+  scroll-padding-top: var(--header-height);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html:has(.timeline) {
+    scroll-snap-type: y proximity;
+  }
+
+  @media (pointer: coarse) {
+    html:has(.timeline) {
+      scroll-snap-type: y mandatory;
+    }
+  }
+}
+
 body {
   font-family: var(--font-secondary);
   font-size: 16px;
@@ -1037,6 +1053,7 @@ h1, h2, h3, h4, h5, h6 {
 .footer {
   background-color: var(--color-cream);
   padding: 40px 0;
+  scroll-snap-align: start;
 }
 
 .footer__container {
@@ -1364,15 +1381,22 @@ h1, h2, h3, h4, h5, h6 {
   grid-template-columns: 1fr auto 1fr;
   gap: 40px;
   align-items: center;
-  margin-bottom: 60px;
+  margin-bottom: 0;
+  padding-block: 8vh;
   opacity: 1;
   transform: translateY(0);
-  transition: all 0.6s ease;
+  transition: opacity 0.45s ease-out, transform 0.45s ease-out;
+  scroll-snap-align: center;
+  scroll-snap-stop: always;
+}
+
+.timeline__item:last-child {
+  padding-bottom: 12vh;
 }
 
 .timeline__item--hidden {
   opacity: 0;
-  transform: translateY(30px);
+  transform: translateY(12px);
 }
 
 .timeline__item--visible {
@@ -1912,6 +1936,7 @@ h1, h2, h3, h4, h5, h6 {
   .timeline__item {
     grid-template-columns: auto 1fr;
     gap: 20px;
+    padding-block: 5vh;
   }
   
   .timeline__item:nth-child(even) .timeline__content,
@@ -2671,6 +2696,16 @@ img[src] {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+  }
+
+  html:has(.timeline) {
+    scroll-snap-type: none;
+    scroll-behavior: auto;
+  }
+
+  .timeline__item--hidden {
+    opacity: 1;
+    transform: none;
   }
   
   .animate-on-scroll {

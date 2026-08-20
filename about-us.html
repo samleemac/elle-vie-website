@@ -286,9 +286,8 @@
       }
     }
 
-    // Timeline functionality - using window.onload for maximum compatibility
     window.onload = function() {
-      // Timeline animation functionality
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       const timelineItems = document.querySelectorAll('.timeline__item');
       const observer = new window.IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
@@ -299,52 +298,86 @@
           }
         });
       }, {
-        threshold: 0.2
+        threshold: 0.15,
+        rootMargin: '0px 0px 20% 0px'
       });
       timelineItems.forEach(item => {
         observer.observe(item);
       });
 
-      // Animated timeline line
       const timelineContainer = document.querySelector('.timeline__container');
       const timeline = document.querySelector('.timeline');
-      
+      let lineTick = false;
+      let settling = false;
+
       function updateTimelineLine() {
         if (!timelineContainer || !timeline) return;
-        
-        const timelineRect = timeline.getBoundingClientRect();
-        const windowHeight = window.innerHeight;
-        
-        const timelineTop = timelineRect.top;
-        const timelineBottom = timelineRect.bottom;
-        const timelineHeight = timelineRect.height;
-        
-        let scrollProgress = 0;
-        
-        if (timelineBottom < 0) {
-          scrollProgress = 1;
+
+        const containerRect = timelineContainer.getBoundingClientRect();
+        const viewMid = window.innerHeight * 0.45;
+        let progress = 0;
+
+        if (containerRect.bottom <= 0) {
+          progress = 1;
+        } else if (containerRect.top < window.innerHeight && containerRect.height > 0) {
+          progress = (viewMid - containerRect.top) / containerRect.height;
         }
-        else if (timelineTop > windowHeight) {
-          scrollProgress = 0;
-        }
-        else {
-          const scrolledPastTop = Math.max(0, -timelineTop);
-          const totalScrollableDistance = timelineHeight + windowHeight;
-          scrollProgress = Math.min(scrolledPastTop / (timelineHeight - windowHeight + 200), 1);
-          
-          if (timelineTop < windowHeight) {
-            const entryProgress = Math.max(0, (windowHeight - timelineTop) / windowHeight);
-            scrollProgress = Math.max(scrollProgress, entryProgress * 0.1);
-          }
-        }
-        
-        scrollProgress = Math.max(0, Math.min(1, scrollProgress));
-        timelineContainer.style.setProperty('--line-progress', `${scrollProgress * 100}%`);
+
+        timelineContainer.style.setProperty('--line-progress', (Math.max(0, Math.min(1, progress)) * 100) + '%');
       }
-      
-      window.addEventListener('scroll', updateTimelineLine);
+
+      function onScrollFrame() {
+        updateTimelineLine();
+        lineTick = false;
+      }
+
+      window.addEventListener('scroll', function() {
+        if (!lineTick) {
+          lineTick = true;
+          window.requestAnimationFrame(onScrollFrame);
+        }
+      }, { passive: true });
       window.addEventListener('resize', updateTimelineLine);
       updateTimelineLine();
+
+      function settleToEvent() {
+        if (settling || prefersReducedMotion || !timeline || timelineItems.length === 0) return;
+        if (window.matchMedia('(pointer: coarse)').matches) return;
+
+        const timelineRect = timeline.getBoundingClientRect();
+        if (timelineRect.bottom < 120 || timelineRect.top > window.innerHeight - 120) return;
+
+        const headerOffset = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--header-height')) || 80;
+        const viewCenter = headerOffset + (window.innerHeight - headerOffset) / 2;
+        let nearest = null;
+        let nearestDist = Infinity;
+
+        timelineItems.forEach(function(item) {
+          const rect = item.getBoundingClientRect();
+          const dist = Math.abs((rect.top + rect.height / 2) - viewCenter);
+          if (dist < nearestDist) {
+            nearestDist = dist;
+            nearest = item;
+          }
+        });
+
+        if (!nearest || nearestDist < 28 || nearestDist > window.innerHeight * 0.38) return;
+        settling = true;
+        nearest.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        window.setTimeout(function() {
+          settling = false;
+        }, 420);
+      }
+
+      if ('onscrollend' in window) {
+        window.addEventListener('scrollend', settleToEvent, { passive: true });
+      } else {
+        var settleTimer;
+        window.addEventListener('scroll', function() {
+          window.clearTimeout(settleTimer);
+          settleTimer = window.setTimeout(settleToEvent, 90);
+        }, { passive: true });
+      }
       
       // Scroll to top button
       var scrollBtn = document.getElementById('scrollToTop');
