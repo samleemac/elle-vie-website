@@ -51,6 +51,10 @@ html:has(.timeline) {
       scroll-snap-type: y mandatory;
     }
   }
+
+  html.timeline-snap-off {
+    scroll-snap-type: none;
+  }
 }
 
 body {
@@ -1053,7 +1057,6 @@ h1, h2, h3, h4, h5, h6 {
 .footer {
   background-color: var(--color-cream);
   padding: 40px 0;
-  scroll-snap-align: start;
 }
 
 .footer__container {
@@ -1278,7 +1281,7 @@ h1, h2, h3, h4, h5, h6 {
    Timeline
    ========================================== */
 .timeline {
-  padding: 100px 0;
+  padding: 100px 0 48vh;
   background-color: var(--color-white);
   position: relative;
 }
@@ -1330,8 +1333,16 @@ h1, h2, h3, h4, h5, h6 {
   transition: opacity 0.45s ease-out, transform 0.45s ease-out;
 }
 
-.timeline__item:last-child {
-  padding-bottom: 12vh;
+.timeline__end {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background-color: var(--color-primary);
+  margin: 16px auto 0;
+  position: relative;
+  z-index: 1;
+  scroll-snap-align: center;
+  scroll-snap-stop: normal;
 }
 
 .timeline__item--hidden {
@@ -1894,6 +1905,11 @@ h1, h2, h3, h4, h5, h6 {
     width: 50px;
     height: 50px;
     font-size: 12px;
+  }
+
+  .timeline__end {
+    margin-left: 9px;
+    margin-right: auto;
   }
   
   .service-section__layout,
