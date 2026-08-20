@@ -311,11 +311,19 @@
       let lineTick = false;
       let settling = false;
 
+      function headerOffset() {
+        return parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--header-height')) || 80;
+      }
+
+      function viewCenterY() {
+        return headerOffset() + (window.innerHeight - headerOffset()) / 2;
+      }
+
       function updateTimelineLine() {
         if (!timelineContainer || !timeline) return;
 
         const containerRect = timelineContainer.getBoundingClientRect();
-        const viewMid = window.innerHeight * 0.45;
+        const viewMid = viewCenterY();
         let progress = 0;
 
         if (containerRect.bottom <= 0) {
@@ -342,29 +350,32 @@
       updateTimelineLine();
 
       function settleToEvent() {
-        if (settling || prefersReducedMotion || !timeline || timelineItems.length === 0) return;
+        if (settling || prefersReducedMotion || !timeline) return;
         if (window.matchMedia('(pointer: coarse)').matches) return;
+
+        const years = timeline.querySelectorAll('.timeline__year');
+        if (years.length === 0) return;
 
         const timelineRect = timeline.getBoundingClientRect();
         if (timelineRect.bottom < 120 || timelineRect.top > window.innerHeight - 120) return;
 
-        const headerOffset = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--header-height')) || 80;
-        const viewCenter = headerOffset + (window.innerHeight - headerOffset) / 2;
+        const viewCenter = viewCenterY();
         let nearest = null;
         let nearestDist = Infinity;
 
-        timelineItems.forEach(function(item) {
-          const rect = item.getBoundingClientRect();
+        years.forEach(function(year) {
+          const rect = year.getBoundingClientRect();
           const dist = Math.abs((rect.top + rect.height / 2) - viewCenter);
           if (dist < nearestDist) {
             nearestDist = dist;
-            nearest = item;
+            nearest = year;
           }
         });
 
-        if (!nearest || nearestDist < 28 || nearestDist > window.innerHeight * 0.38) return;
+        if (!nearest || nearestDist < 12 || nearestDist > window.innerHeight * 0.38) return;
         settling = true;
-        nearest.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        const yearCenter = nearest.getBoundingClientRect().top + window.scrollY + nearest.offsetHeight / 2;
+        window.scrollTo({ top: Math.max(0, yearCenter - viewCenter), behavior: 'smooth' });
         window.setTimeout(function() {
           settling = false;
         }, 420);

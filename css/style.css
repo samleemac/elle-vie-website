@@ -1417,8 +1417,6 @@ h1, h2, h3, h4, h5, h6 {
   opacity: 1;
   transform: translateY(0);
   transition: opacity 0.45s ease-out, transform 0.45s ease-out;
-  scroll-snap-align: center;
-  scroll-snap-stop: always;
 }
 
 .timeline__item:last-child {
@@ -1459,6 +1457,8 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 700;
   font-size: 14px;
   z-index: 1;
+  scroll-snap-align: center;
+  scroll-snap-stop: always;
 }
 
 .timeline__image {
