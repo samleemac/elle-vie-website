@@ -4,8 +4,8 @@
   "description": "Hair salon and beauty treatments in Belper, Derbyshire.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#c9a86c",
+  "background_color": "#ebe4d6",
+  "theme_color": "#ebe4d6",
   "lang": "en-GB",
   "icons": [
     {
