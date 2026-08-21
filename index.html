@@ -94,22 +94,22 @@
     <header class="header">
       <div class="header__container">
         <a href="index.html" class="header__logo logo">
-          <img src="images/home/logo.png" alt="Elle Vie" />
+          <img src="images/home/logo.png" alt="Elle Vie home" />
         </a>
-        <div class="header__navigation">
-          <div class="header__menu menu">
-            <nav class="menu__body" role="navigation" aria-label="Main navigation">
-              <ul class="menu__list">
-                <li class="menu__item"><a href="index.html" class="menu__link active">Home</a></li>
-                <li class="menu__item"><a href="about-us.html" class="menu__link">About Us</a></li>
-                <li class="menu__item"><a href="services.html" class="menu__link">Services</a></li>
-                <li class="menu__item"><a href="https://www.google.com/maps/place/Elle+Vie+Hair+%26+Beauty/@53.0240433,-1.4788394,15z/data=!4m2!3m1!1s0x0:0xa0e044187cab722d?sa=X&ved=2ahUKEwjLvsyBmYyDAxWkQkEAHSjqBVkQ_BJ6BAgUEAA" class="menu__link" target="_blank">Find Us</a></li>
-              </ul>
-            </nav>
-          </div>
-          <div class="header__actions actions-header">
-            <button type="button" class="menu__icon icon-menu" onclick="toggleMenu()" aria-label="Toggle navigation menu" aria-expanded="false"><span></span></button>
-          </div>
+        <nav class="menu__body" id="site-nav" aria-label="Main">
+          <ul class="menu__list">
+            <li class="menu__item"><a href="about-us.html" class="menu__link">About</a></li>
+            <li class="menu__item"><a href="services.html" class="menu__link">Services</a></li>
+            <li class="menu__item"><a href="find-us.html" class="menu__link">Find us</a></li>
+          </ul>
+        </nav>
+        <div class="header__actions">
+          <a href="tel:01773823300" class="header__call" aria-label="Call 01773 823300">
+            <span class="header__call-num">01773 823300</span>
+            <span class="header__call-short">Call</span>
+          </a>
+          <button type="button" class="header__book" data-open-reservation>Book</button>
+          <button type="button" class="icon-menu" aria-label="Open menu" aria-expanded="false" aria-controls="site-nav"><span></span></button>
         </div>
       </div>
     </header>
@@ -441,7 +441,7 @@
   </div>
   <div class="modal" id="reservationModal">
     <div class="modal__content">
-      <button class="modal__close">&times;</button>
+      <button class="modal__close" aria-label="Close booking options">&times;</button>
       <div class="modal__header">
         <h2>Book via phone or messenger</h2>
       </div>
@@ -454,7 +454,7 @@
             </div>
             <span>Phone</span>
           </a>
-          <a href="https://www.messenger.com/t/545408738829020" target="_blank" class="modal__option">
+          <a href="https://www.messenger.com/t/545408738829020" target="_blank" rel="noopener noreferrer" class="modal__option">
             <div class="modal__icon">
               <img src="images/contact/messenger.png" alt="Messenger">
             </div>
@@ -464,76 +464,9 @@
       </div>
     </div>
   </div>
+  <script src="js/nav.js"></script>
   <script>
-    // Simple toggle function that works on any server/protocol
-    function toggleMenu() {
-      console.log('Toggle menu called');
-      var body = document.body;
-      if (body.classList.contains('menu-open')) {
-        body.classList.remove('menu-open');
-        console.log('Menu closed');
-      } else {
-        body.classList.add('menu-open');
-        console.log('Menu opened');
-      }
-    }
-
-    // Simple modal functions
-    function openModal() {
-      var modal = document.getElementById('reservationModal');
-      if (modal) {
-        modal.classList.add('active');
-        document.body.style.overflow = 'hidden';
-      }
-    }
-
-    function closeModal() {
-      var modal = document.getElementById('reservationModal');
-      if (modal) {
-        modal.classList.remove('active');
-        document.body.style.overflow = '';
-      }
-    }
-
-    // Wait for page to load
     window.onload = function() {
-      console.log('Page loaded, setting up...');
-      
-      // Setup modal buttons
-      var reservationBtns = document.querySelectorAll('.main__button');
-      for (var i = 0; i < reservationBtns.length; i++) {
-        reservationBtns[i].onclick = function(e) {
-          e.preventDefault();
-          openModal();
-        };
-      }
-
-      // Setup modal close
-      var closeBtn = document.querySelector('.modal__close');
-      if (closeBtn) {
-        closeBtn.onclick = closeModal;
-      }
-
-      // Close modal when clicking outside
-      var modal = document.getElementById('reservationModal');
-      if (modal) {
-        modal.onclick = function(e) {
-          if (e.target === modal) {
-            closeModal();
-          }
-        };
-      }
-
-      // Close modal on escape
-      document.onkeydown = function(e) {
-        if (e.key === 'Escape') {
-          closeModal();
-        }
-      };
-
-      console.log('Setup complete');
-      
-      // Scroll to top button
       var scrollBtn = document.getElementById('scrollToTop');
       if (scrollBtn) {
         window.addEventListener('scroll', function() {
@@ -547,17 +480,6 @@
         scrollBtn.addEventListener('click', function() {
           window.scrollTo({ top: 0, behavior: 'smooth' });
         });
-      }
-      
-      // Update aria-expanded on menu toggle
-      var menuBtn = document.querySelector('.icon-menu');
-      if (menuBtn) {
-        var originalToggle = window.toggleMenu;
-        window.toggleMenu = function() {
-          originalToggle();
-          var isOpen = document.body.classList.contains('menu-open');
-          menuBtn.setAttribute('aria-expanded', isOpen);
-        };
       }
       
       // Scroll-triggered animations

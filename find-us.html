@@ -65,91 +65,88 @@
     <header class="header">
       <div class="header__container">
         <a href="index.html" class="header__logo logo">
-          <img src="images/home/logo.png" alt="Elle Vie" />
+          <img src="images/home/logo.png" alt="Elle Vie home" />
         </a>
-        <div class="header__navigation">
-          <div class="header__menu menu">
-            <nav class="menu__body" role="navigation" aria-label="Main navigation">
-              <ul class="menu__list">
-                <li class="menu__item"><a href="index.html" class="menu__link">Home</a></li>
-                <li class="menu__item"><a href="about-us.html" class="menu__link">About Us</a></li>
-                <li class="menu__item"><a href="services.html" class="menu__link">Services</a></li>
-                <li class="menu__item"><a href="https://www.google.com/maps/place/Elle+Vie+Hair+%26+Beauty/@53.0240433,-1.4788394,15z/data=!4m2!3m1!1s0x0:0xa0e044187cab722d?sa=X&ved=2ahUKEwjLvsyBmYyDAxWkQkEAHSjqBVkQ_BJ6BAgUEAA" class="menu__link active" target="_blank">Find Us</a></li>
-              </ul>
-            </nav>
-          </div>
-          <div class="header__actions actions-header">
-            <button type="button" class="menu__icon icon-menu" onclick="toggleMenu()" aria-label="Toggle navigation menu" aria-expanded="false"><span></span></button>
-          </div>
+        <nav class="menu__body" id="site-nav" aria-label="Main">
+          <ul class="menu__list">
+            <li class="menu__item"><a href="about-us.html" class="menu__link">About</a></li>
+            <li class="menu__item"><a href="services.html" class="menu__link">Services</a></li>
+            <li class="menu__item"><a href="find-us.html" class="menu__link active">Find us</a></li>
+          </ul>
+        </nav>
+        <div class="header__actions">
+          <a href="tel:01773823300" class="header__call" aria-label="Call 01773 823300">
+            <span class="header__call-num">01773 823300</span>
+            <span class="header__call-short">Call</span>
+          </a>
+          <button type="button" class="header__book" data-open-reservation>Book</button>
+          <button type="button" class="icon-menu" aria-label="Open menu" aria-expanded="false" aria-controls="site-nav"><span></span></button>
         </div>
       </div>
     </header>
     <main class="page" id="main-content">
-      <section class="page__main main main_contact main_pages">
-        <div class="main__container main__container_pages">
-          <h1 class="main__title">Find Us</h1>
-          <div class="main__text main__text_pages">
-            We'd love to see you! Visit us at our salon in the heart of Belper.
+      <article class="find">
+        <div class="find__container">
+          <header class="find__intro">
+            <p class="find__label">Find us</p>
+            <h1 class="find__title">1 Church Street, Belper</h1>
+            <p class="find__lede">The cream shopfront on the stone terrace. DE56 1EY.</p>
+          </header>
+
+          <div class="find__layout">
+            <div class="find__details">
+              <address class="find__address">
+                1 Church Street<br>
+                Belper, Derbyshire<br>
+                DE56 1EY
+              </address>
+              <p class="find__links">
+                <a href="tel:01773823300">01773 823300</a>
+                <a href="mailto:ellevie@hotmail.co.uk">ellevie@hotmail.co.uk</a>
+              </p>
+              <dl class="find__hours">
+                <div>
+                  <dt>Tuesday</dt>
+                  <dd>12pm – 8pm</dd>
+                </div>
+                <div>
+                  <dt>Wednesday</dt>
+                  <dd>9.30am – 2pm</dd>
+                </div>
+                <div>
+                  <dt>Thursday</dt>
+                  <dd>9.30am – 5pm</dd>
+                </div>
+                <div>
+                  <dt>Friday</dt>
+                  <dd>9.30am – 2.30pm</dd>
+                </div>
+                <div>
+                  <dt>Saturday</dt>
+                  <dd>9am – 3pm</dd>
+                </div>
+                <div>
+                  <dt>Sunday – Monday</dt>
+                  <dd>Closed</dd>
+                </div>
+              </dl>
+              <a class="find__directions" href="https://www.google.com/maps/dir/?api=1&destination=1+Church+Street,+Belper,+DE56+1EY" target="_blank" rel="noopener noreferrer">Get directions</a>
+            </div>
+
+            <figure class="find__map">
+              <iframe
+                title="Map of Elle Vie Hair &amp; Beauty on Church Street, Belper"
+                src="https://www.openstreetmap.org/export/embed.html?bbox=-1.4828%2C53.0219%2C-1.4748%2C53.0262&amp;layer=mapnik&amp;marker=53.0240433%2C-1.4788394"
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade">
+              </iframe>
+              <figcaption class="find__map-caption">
+                <a href="https://www.google.com/maps/place/Elle+Vie+Hair+%26+Beauty/@53.0240433,-1.4788394,15z/data=!4m2!3m1!1s0x0:0xa0e044187cab722d?sa=X&ved=2ahUKEwjLvsyBmYyDAxWkQkEAHSjqBVkQ_BJ6BAgUEAA" target="_blank" rel="noopener noreferrer">Open the map</a>
+              </figcaption>
+            </figure>
           </div>
         </div>
-      </section>
-      <section class="page__contact contact animate-on-scroll">
-        <div class="contact__container">
-          <div class="contact__contacts">
-            <h2 class="contact__title">You can find us at</h2>
-            <div class="contact__connect connect-contact">
-              <a href="tel:01773823300" class="connect-contact__item">
-                <div class="connect-contact__icon"><img src="images/contact/phone.svg" alt="Phone" /></div>
-                <div class="connect-contact__content">
-                  <h3 class="connect-contant__type">Phone</h3>
-                  <div class="connect-contact__label">01773 823 300</div>
-                </div>
-              </a>
-              <a href="mailto:ellevie@hotmail.co.uk" class="connect-contact__item">
-                <div class="connect-contact__icon"><img src="images/contact/email.svg" alt="Email" /></div>
-                <div class="connect-contact__content">
-                  <h3 class="connect-contant__type">Email</h3>
-                  <div class="connect-contact__label">ellevie@hotmail.co.uk</div>
-                </div>
-              </a>
-              <a href="https://www.google.com/maps/place/Elle+Vie+Hair+%26+Beauty/@53.0240433,-1.4788394,15z/data=!4m2!3m1!1s0x0:0xa0e044187cab722d?sa=X&ved=2ahUKEwjLvsyBmYyDAxWkQkEAHSjqBVkQ_BJ6BAgUEAA"
-                target="_blank" class="connect-contact__item">
-                <div class="connect-contact__icon"><img src="images/contact/address.svg" alt="Address" /></div>
-                <div class="connect-contact__content">
-                  <h3 class="connect-contant__type">Address</h3>
-                  <div class="connect-contact__label">1 Church Street, Belper, Derbyshire, DE56 1EY</div>
-                </div>
-              </a>
-            </div>
-            <div class="contact__links">
-              <a href="https://www.facebook.com/elleviebelper" target="_blank" class="contact__link"><img src="images/contact/fb.svg" alt="Facebook" /></a>
-              <a href="https://www.instagram.com/elleviebelper/" target="_blank" class="contact__link"><img src="images/contact/ig.svg" alt="Instagram" /></a>
-            </div>
-          </div>
-          <div class="contact__info">
-            <h2 class="contact__title">Opening Hours</h2>
-            <div class="contact__text">
-              <p><strong>Sunday - Monday:</strong> Closed</p>
-              <p><strong>Tuesday:</strong> 12pm - 8pm</p>
-              <p><strong>Wednesday:</strong> 9.30am - 2pm</p>
-              <p><strong>Thursday:</strong> 9.30am - 5pm</p>
-              <p><strong>Friday:</strong> 9:30am - 2.30pm</p>
-              <p><strong>Saturday:</strong> 9am - 3pm</p>
-            </div>
-          </div>
-        </div>
-      </section>
-      <section class="page__map map animate-on-scroll">
-        <iframe
-          width="100%"
-          height="450"
-          style="border:0"
-          loading="lazy"
-          allowfullscreen
-          referrerpolicy="no-referrer-when-downgrade"
-          src="https://www.google.com/maps/embed/v1/place?key=AIzaSyAExcxjRVQDHMXlmBZWtbrxhFWxT8xkmKg&q=1+Church+St,+Belper+DE56+1EY,+UK&zoom=16">
-        </iframe>
-      </section>
+      </article>
     </main>
     <footer class="footer">
       <div class="footer__container">
@@ -197,17 +194,33 @@
       </div>
     </footer>
   </div>
+  <div class="modal" id="reservationModal">
+    <div class="modal__content">
+      <button class="modal__close" aria-label="Close booking options">&times;</button>
+      <div class="modal__header">
+        <h2>Book via phone or messenger</h2>
+      </div>
+      <div class="modal__body">
+        <h3>Click an option below:</h3>
+        <div class="modal__options">
+          <a href="tel:01773823300" class="modal__option">
+            <div class="modal__icon">
+              <img src="images/contact/phone.svg" alt="Phone">
+            </div>
+            <span>Phone</span>
+          </a>
+          <a href="https://www.messenger.com/t/545408738829020" target="_blank" rel="noopener noreferrer" class="modal__option">
+            <div class="modal__icon">
+              <img src="images/contact/messenger.png" alt="Messenger">
+            </div>
+            <span>Messenger</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="js/nav.js"></script>
   <script>
-    function toggleMenu() {
-      var body = document.body;
-      if (body.classList.contains('menu-open')) {
-        body.classList.remove('menu-open');
-      } else {
-        body.classList.add('menu-open');
-      }
-    }
-    
-    // On page load
     window.onload = function() {
       // Scroll to top button
       var scrollBtn = document.getElementById('scrollToTop');
@@ -223,17 +236,6 @@
         scrollBtn.addEventListener('click', function() {
           window.scrollTo({ top: 0, behavior: 'smooth' });
         });
-      }
-      
-      // Update aria-expanded on menu toggle
-      var menuBtn = document.querySelector('.icon-menu');
-      if (menuBtn) {
-        var originalToggle = window.toggleMenu;
-        window.toggleMenu = function() {
-          originalToggle();
-          var isOpen = document.body.classList.contains('menu-open');
-          menuBtn.setAttribute('aria-expanded', isOpen);
-        };
       }
       
       // Scroll-triggered animations
